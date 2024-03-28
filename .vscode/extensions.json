@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "vue.volar",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "wallabyjs.console-ninja",
+    "vunguyentuan.vscode-css-variables",
+    "esbenp.prettier-vscode"
+  ]
+}

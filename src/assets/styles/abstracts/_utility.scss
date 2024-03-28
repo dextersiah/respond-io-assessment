@@ -1,0 +1,25 @@
+@use "./mixins" as *;
+
+.mw-container {
+    max-width: 1024px;
+
+    @include responsive(lg) {
+        // Center items
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        // Remove additional inline paddings
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}
+
+.padding-container {
+    @apply px-5 md:px-10 lg:px-16;
+    @extend .mw-container;
+}
+
+.margin-container {
+    @apply mx-5 md:mx-10 lg:mx-16;
+    @extend .mw-container;
+}

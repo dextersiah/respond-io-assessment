@@ -1,0 +1,11 @@
+@use "./abstracts/index" as *;
+@use "./tailwind.scss" as *;
+
+// Leverage the @apply directive to apply multiple css utilities within 1 class
+.blue-block {
+    @apply bg-blue-400 px-4 py-3 text-blue-50 mt-3;
+}
+
+.btn-primary {
+    @apply bg-yellow-400 rounded-md px-4 py-2 table;
+}

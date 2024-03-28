@@ -1,0 +1,23 @@
+$responsive-breakpoints: (
+    sm: 40em,
+    //640px
+    md: 48em,
+    //768px
+    lg: 64em,
+    //1024px
+    xl: 80em,
+    //1280px
+    break-point: 90em,
+    //1440px
+);
+
+@mixin responsive($type) {
+    $size: map-get(
+        $map: $responsive-breakpoints,
+        $key: $type,
+    );
+
+    @media only screen and (min-width: $size) {
+        @content;
+    }
+}
