@@ -1,65 +1,45 @@
 
 <script setup lang="ts">
-import { initialData } from '@/lib/constants';
+import { useFlowChart } from '@/stores/flowchart';
 import { Background } from '@vue-flow/background';
-import { Position, VueFlow } from '@vue-flow/core';
-import { ref } from 'vue';
-import CustomNode from './Nodes/CustomNode.vue';
+import { VueFlow } from '@vue-flow/core';
+import AddCommentNode from './Nodes/AddCommentNode.vue';
+import BusinessHoursNode from './Nodes/BusinessHoursNode.vue';
+import DateTimeConnector from './Nodes/DateTimeConnector.vue';
+import MessageNode from './Nodes/MessageNode.vue';
+import TriggerNode from './Nodes/TriggerNode.vue';
 
-const initialNodes = ref(initialData)
+
+// State
+const flowChart = useFlowChart()
 
 </script>
 
 <template>
-    <VueFlow 
-        v-model="initialNodes"
+    <VueFlow
+        v-if="flowChart.nodes.length"
+        v-model="flowChart.nodes"
         :fit-view-on-init="true"
     >
         <template #node-trigger="props">
-            <CustomNode
-                :id="props.id"
-                icon="🚀"
-                :title="props.data.label"
-                :node-handle-position="Position.Bottom"
-            />
+            <TriggerNode v-bind="props" />
         </template>
 
         <template #node-dateTime="props">
-            <CustomNode
-                :id="props.id"
-                icon="🚀"
-                :title="props.data.label"
-                :node-handle-position="Position.Bottom"
-            />
+            <BusinessHoursNode v-bind="props" />
         </template>
 
         <template #node-dateTimeConnector="props">
-            <CustomNode
-                :id="props.id"
-                icon="🚀"
-                :title="props.data.label"
-                :node-handle-position="Position.Bottom"
-            />
+            <DateTimeConnector v-bind="props" />
         </template>
 
         <template #node-sendMessage="props">
-            <CustomNode
-                :id="props.id"
-                icon="🚀"
-                :title="props.data.label"
-                :node-handle-position="Position.Bottom"
-            />
+            <MessageNode v-bind="props" />
         </template>
 
         <template #node-addComment="props">
-            <CustomNode
-                :id="props.id"
-                icon="🚀"
-                :title="props.data.label"
-                :node-handle-position="Position.Bottom"
-            />
+            <AddCommentNode v-bind="props" />
         </template>
-
 
         <Background  />
     </VueFlow>  
