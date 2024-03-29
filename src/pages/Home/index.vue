@@ -1,14 +1,10 @@
 <script setup lang="ts">
-import Button from '@/components/ui/button/Button.vue';
+import Canvas from '@/components/VueFlow/Canvas.vue';
 
 </script>
 
 <template>
     <main class="h-screen grid place-items-center">
-        <div class="flex gap-5">
-            <Button>
-                Default
-            </Button>
-        </div>
+        <Canvas />
     </main>
 </template>
