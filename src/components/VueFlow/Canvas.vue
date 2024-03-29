@@ -18,7 +18,8 @@ const flowChart = useFlowChart()
 <template>
     <VueFlow
         v-if="flowChart.nodes.length"
-        v-model="flowChart.nodes"
+        :nodes="flowChart.nodes"
+        :edges="flowChart.edges"
         :fit-view-on-init="true"
     >
         <template #node-trigger="props">

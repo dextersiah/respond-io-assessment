@@ -2,7 +2,7 @@
 	{
 		"id": 1,
 		"name": "Trigger",
-		"parentId": -1,
+		"parentId": "-1",
 		"type": "trigger",
 		"position": {
 			"x": 500,
@@ -78,7 +78,7 @@
 			"timezone": "UTC",
 			"action": "businessHours"
 		},
-		"parentId": 1
+		"parentId": "1"
 	},
 	{
 		"name": "Success",
