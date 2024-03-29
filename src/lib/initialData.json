@@ -1,0 +1,162 @@
+[
+	{
+		"id": 1,
+		"name": "Trigger",
+		"parentId": -1,
+		"type": "trigger",
+		"position": {
+			"x": 500,
+			"y": 0
+		},
+		"data": {
+			"type": "conversationOpened",
+			"oncePerContact": false,
+			"payload": [
+				{
+					"type": "text",
+					"text": "Conversation Opened"
+				}
+			]
+		}
+	},
+	{
+		"name": "Business Hours",
+		"id": "d09c08",
+		"type": "dateTime",
+		"position": {
+			"x": 500,
+			"y": 250
+		},
+		"data": {
+			"payload": [
+				{
+					"type": "text",
+					"text": "Business Hours - UTC"
+				}
+			],
+			"times": [
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "mon"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "tue"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "wed"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "thu"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "fri"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "sat"
+				},
+				{
+					"startTime": "09:00",
+					"endTime": "17:00",
+					"day": "sun"
+				}
+			],
+			"connectors": [
+				"161f52",
+				"28c4b9"
+			],
+			"timezone": "UTC",
+			"action": "businessHours"
+		},
+		"parentId": 1
+	},
+	{
+		"name": "Success",
+		"id": "161f52",
+		"type": "dateTimeConnector",
+		"position": {
+			"x": 400,
+			"y": 500
+		},
+		"data": {
+			"connectorType": "success"
+		},
+		"parentId": "d09c08"
+	},
+	{
+		"name": "Failure",
+		"id": "28c4b9",
+		"type": "dateTimeConnector",
+		"position": {
+			"x": 600,
+			"y": 500
+		},
+		"data": {
+			"connectorType": "failure"
+		},
+		"parentId": "d09c08"
+	},
+	{
+		"name": "Welcome Message",
+		"id": "b0653a",
+		"type": "sendMessage",
+		"position": {
+            "x": 400,
+            "y": 750
+		},
+		"data": {
+			"payload": [
+				{
+					"type": "text",
+					"text": "Hello there 👋 welcome to the chat!"
+				},
+				{
+					"type": "attachment",
+					"attachment": "https://fastly.picsum.photos/id/396/536/354.jpg?hmac=GmUosOuXb6nGkFhmTE-83i0ciQcaleMyvIyqzeFbW58"
+				}
+			]
+		},
+		"parentId": "161f52"
+	},
+	{
+		"name": "Away Message",
+		"id": "b6a0c1",
+		"type": "sendMessage",
+		"position": {
+            "x": 600,
+            "y": 750
+        },
+		"data": {
+			"payload": [
+				{
+					"type": "text",
+					"text": "Sorry, we are currently away. We will respond as soon as possible."
+				}
+			]
+		},
+		"parentId": "28c4b9"
+	},
+	{
+		"id": "e879e4",
+		"type": "addComment",
+		"parentId": "b6a0c1",
+		"name": "Add Comment #1",
+		"position": {
+            "x": 600,
+            "y": 1000
+        },
+		"data": {
+			"comment": "User message during off hours"
+		}
+	}
+]
