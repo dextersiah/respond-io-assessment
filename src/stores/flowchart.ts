@@ -1,13 +1,13 @@
 import initialData from "@/lib/initialData.json";
 import type { NodeData } from "@/types/NodeData";
-import { Position, type Node } from "@vue-flow/core";
+import { Position, type DefaultEdge, type Node } from "@vue-flow/core";
 import { defineStore } from "pinia";
 import { onMounted, ref } from "vue";
 
 //@ts-ignore vueflow type imports causing error
 export const useFlowChart = defineStore("flowchart", () => {
     const nodes = ref<Node<NodeData>[]>([]);
-    const edges = ref<any[]>([]);
+    const edges = ref<DefaultEdge[]>([]);
 
 
     onMounted(() => {
@@ -27,7 +27,7 @@ export const useFlowChart = defineStore("flowchart", () => {
             return { 
                 id: node.id.toString(),
                 source: node.parentId,
-                target: node.id,
+                target: node.id.toString(),
                 type: "smoothstep",
                 sourcePosition: Position.Bottom,
                 targetPosition: Position.Top,
