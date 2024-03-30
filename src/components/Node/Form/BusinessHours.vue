@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
+import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols';
 import { useFlowChart } from '@/stores/flowchart';
 import type { NodeData } from '@/types/NodeData';
 import { inject, ref } from 'vue';
@@ -32,6 +33,7 @@ const injectedNodeDetails = inject<{
     nodeData: NodeData | undefined
 }>('nodeData')
 
+const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 const businessHoursRef = ref<InstanceType<typeof DailyBusinessHours>[] | null>(null)
 
@@ -42,6 +44,8 @@ const onSaveChangesClickHandler = () => {
         updateSpecificNodeData(route.params.id as string, { 
             times
         })
+
+        injectSheet?.hideSheet()
     }
 }
 

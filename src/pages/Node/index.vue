@@ -7,8 +7,9 @@ import {
     SheetHeader,
     SheetTitle
 } from '@/components/ui/sheet';
+import { SHEET_INJECTION_KEY } from '@/lib/injectionSymbols';
 import { VisuallyHidden } from 'radix-vue';
-import { ref, watch } from 'vue';
+import { provide, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
 
@@ -23,7 +24,11 @@ const router = useRouter()
  * State
  */
 const sheetState = ref(true);
-
+provide(SHEET_INJECTION_KEY, {
+    hideSheet: () => {
+        sheetState.value = false
+    }
+})
 
 /**
  * Watchers

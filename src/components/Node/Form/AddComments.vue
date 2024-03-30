@@ -8,6 +8,7 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
+import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
 import { useFlowChart } from '@/stores/flowchart'
 import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -31,6 +32,7 @@ const injectedNodeDetails = inject<{
     formCallback: () => void
         }>('nodeData')
 
+const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 /**
  * Schema
@@ -52,6 +54,7 @@ const { handleSubmit } = useForm({
 
 const onSubmit = handleSubmit((values) => {
     updateSpecificNodeData(route.params.id as string, values)
+    injectSheet?.hideSheet()
 })
 </script>
 

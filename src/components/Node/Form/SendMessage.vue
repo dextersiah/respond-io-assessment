@@ -43,6 +43,7 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
 import { useFlowChart } from '@/stores/flowchart'
 import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -57,6 +58,9 @@ import * as z from 'zod'
 const injectedNodeDetails = inject<{
     nodeData: NodeData | undefined
 }>('nodeData')
+
+const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
+
 const route = useRoute()
 
 const { updateSpecificNodeData } = useFlowChart()
@@ -97,6 +101,7 @@ const parseValues = (values: FormType) => {
 
 const onSubmit = handleSubmit((values) => {
     updateSpecificNodeData(route.params.id as string, parseValues(values))
+    injectSheet?.hideSheet()
 })
 
 const onFileUploadedHandler = (value: string) => {
