@@ -35,16 +35,18 @@ export const useFlowChart = defineStore("flowchart", () => {
             };
         })
 
-        edges.value = initialData.map((node) => {
-            return { 
-                id: node.id.toString(),
-                source: node.parentId,
-                target: node.id.toString(),
-                type: "smoothstep",
-                sourcePosition: Position.Bottom,
-                targetPosition: Position.Top,
-            }
-        })
+        edges.value = initialData
+            .filter((node) => node.parentId !== "-1")
+            .map((node) => {
+                return { 
+                    id: node.id.toString(),
+                    source: node.parentId,
+                    target: node.id.toString(),
+                    type: "smoothstep",
+                    sourcePosition: Position.Bottom,
+                    targetPosition: Position.Top,
+                }
+            })
     })
 
     onNodesInitialized(() => {
