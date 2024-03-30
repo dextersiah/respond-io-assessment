@@ -134,6 +134,25 @@ export const useFlowChart = defineStore("flowchart", () => {
             edges.value.splice(index, 1)
         }
     }
+
+    const updateSpecificNodeData = (nodeId: string, data: Partial<NodeData>) => {
+        const index = nodes.value.findIndex((n) => n.id === nodeId)
+
+        if (index !== -1) {
+
+            const nodeData = {
+                ...nodes.value[index].data,
+                ...data
+            }
+
+            nodes.value[index] = {
+                ...nodes.value[index],
+                data: nodeData
+            }
+
+            updateNodeData(nodes.value[index].id, nodeData)
+        }
+    }
  
 
     return { 
@@ -142,6 +161,7 @@ export const useFlowChart = defineStore("flowchart", () => {
         addNewNode,
         getNodeById,
         updateNode,
-        deleteNode
+        deleteNode,
+        updateSpecificNodeData
     };
 });
