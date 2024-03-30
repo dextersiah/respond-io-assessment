@@ -65,7 +65,7 @@ export const useFlowChart = defineStore("flowchart", () => {
     const addNewNode = (node: NewNode) => {
         const nodeId = getId()
 
-        addNodes({
+        const nodeData = {
             id: nodeId,
             position: { x: 0, y: 0 },
             type: node.nodeType,
@@ -78,13 +78,22 @@ export const useFlowChart = defineStore("flowchart", () => {
                     }
                 ]
             }
-        })
+        }
+
+
+        nodes.value.push(nodeData)
+        addNodes(nodeData)
+    }
+
+    const getNodeById = (id: string) => {
+        return nodes.value.find((node) => node.id === id)
     }
  
 
     return { 
         nodes,
         edges,
-        addNewNode
+        addNewNode,
+        getNodeById
     };
 });
