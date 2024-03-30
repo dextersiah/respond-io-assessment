@@ -8,5 +8,6 @@ import Canvas from '@/components/VueFlow/Canvas.vue';
     <main class="h-screen">
         <Canvas />
         <NewNodePopover />
+        <router-view />
     </main>
 </template>
