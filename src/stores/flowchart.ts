@@ -18,7 +18,7 @@ export const useFlowChart = defineStore("flowchart", () => {
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
-    const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData } = useVueFlow();
+    const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData, removeNodes } = useVueFlow();
     const router = useRouter();
 
     /**
@@ -115,6 +115,25 @@ export const useFlowChart = defineStore("flowchart", () => {
         }
 
     }
+
+    const deleteNode = (nodeId: string) => {
+        const index = nodes.value.findIndex((n) => n.id === nodeId)
+
+        if (index !== -1) {
+            removeNodes([nodes.value[index]], true)
+            deleteEdge(nodeId);
+
+            nodes.value.splice(index, 1)
+        }
+    }
+
+    const deleteEdge = (nodeId: string) => {
+        const index = edges.value.findIndex((e) => e.id === nodeId)
+
+        if (index !== -1) {
+            edges.value.splice(index, 1)
+        }
+    }
  
 
     return { 
@@ -122,6 +141,7 @@ export const useFlowChart = defineStore("flowchart", () => {
         edges,
         addNewNode,
         getNodeById,
-        updateNode
+        updateNode,
+        deleteNode
     };
 });

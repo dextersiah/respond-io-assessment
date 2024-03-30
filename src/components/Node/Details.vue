@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-5">
+    <div class="flex flex-col h-[inherit]">
         <div class="flex justify-between items-center">
             <div class="space-y-3">
                 <GlobalText tag="h4" weight="bold">
@@ -16,6 +16,14 @@
         <Separator class="my-5"/>
 
         <component :is="nodeDetailsComponent" />
+        
+        <Button 
+            variant="destructive" 
+            class="w-full mt-auto" 
+            @click="deleteNode(node?.id as string)"
+        >
+            Delete Node
+        </Button>
     </div>
 </template>
 
@@ -26,11 +34,12 @@ import type { NodeData } from '@/types/NodeData';
 import type { Node } from '@vue-flow/core';
 import { computed, defineAsyncComponent, provide, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
 import DetailsDialog from './DetailsDialog.vue';
 
 const route = useRoute();
-const { getNodeById } = useFlowChart()
+const { getNodeById, deleteNode } = useFlowChart()
 
 const node = ref<Node<NodeData> | undefined>(getNodeById(route.params.id as string))
 
