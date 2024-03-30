@@ -13,7 +13,7 @@ import { useFlowChart } from '@/stores/flowchart'
 import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
-import { inject, type Ref } from 'vue'
+import { inject } from 'vue'
 import { useRoute } from 'vue-router'
 import * as z from 'zod'
 
@@ -24,7 +24,7 @@ const { updateNode } = useFlowChart()
 const route = useRoute()
 
 const injectedNodeDetails = inject<{
-    nodeData: Ref<NodeData | undefined>,
+    nodeData: NodeData | undefined,
     formCallback: () => void
         }>('nodeData')
 
@@ -42,8 +42,8 @@ const formSchema = toTypedSchema(Form)
 const { handleSubmit } = useForm({
     validationSchema: formSchema,
     initialValues: {
-        title: injectedNodeDetails?.nodeData?.value?.label || '',
-        description: injectedNodeDetails?.nodeData?.value?.payload?.find((item) => item.type === 'text')?.text || '',
+        title: injectedNodeDetails?.nodeData?.label || '',
+        description: injectedNodeDetails?.nodeData?.payload?.find((item) => item.type === 'text')?.text || '',
     }
 })
 
