@@ -1,7 +1,7 @@
 import type { NewNode } from "@/components/Home/Form/NewNode.vue";
 import initialData from "@/lib/initialData.json";
 import type { NodeData } from "@/types/NodeData";
-import { Position, useVueFlow, type DefaultEdge, type Node } from "@vue-flow/core";
+import { Position, useVueFlow, type Connection, type DefaultEdge, type Node } from "@vue-flow/core";
 import { defineStore } from "pinia";
 import { nextTick, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -21,7 +21,7 @@ export const useFlowChart = defineStore("flowchart", () => {
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
-    const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData, removeNodes } = useVueFlow();
+    const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData, removeNodes, onConnect, addEdges } = useVueFlow();
     const router = useRouter();
 
     /**
@@ -65,6 +65,24 @@ export const useFlowChart = defineStore("flowchart", () => {
             router.push(`/node/${nodeMouseEvent.node.id}`)
         }
     })
+
+    onConnect((connection) => {
+        addNewEdge(connection)
+    })
+
+    const addNewEdge = (connection: Connection) => {
+        const edge = {
+            id: connection.source + connection.target,
+            source: connection.source,
+            target: connection.target,
+            type: "smoothstep",
+            sourcePosition: Position.Bottom,
+            targetPosition: Position.Top,
+        }
+
+        edges.value.push(edge)
+        addEdges(connection)
+    }
  
 
     const addNewNode = (node: NewNode) => {
