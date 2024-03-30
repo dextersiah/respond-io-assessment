@@ -25,6 +25,8 @@
                 </NodeContentMessage>   
             </template>
         </CardContent>
+        <Handle :id="props.id" type="source" :position="Position.Bottom" />
+        <Handle :id="props.id" type="target" :position="Position.Top" />
     </Card>
 
 </template>
@@ -38,7 +40,7 @@ import {
 } from '@/components/ui/card';
 import type { NodeData } from '@/types/NodeData';
 
-import type { NodeProps } from '@vue-flow/core';
+import { Handle, Position, type NodeProps } from '@vue-flow/core';
 import { SendHorizonal } from 'lucide-vue-next';
 import NodeContentImage from '../NodeContentImage.vue';
 import NodeContentMessage from '../NodeContentMessage.vue';

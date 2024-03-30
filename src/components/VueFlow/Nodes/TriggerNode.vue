@@ -12,6 +12,8 @@
         <CardContent>
             Conversation Opened
         </CardContent>
+        <Handle :id="props.id" type="source" :position="Position.Bottom" />
+        <Handle :id="props.id" type="target" :position="Position.Top" />
     </Card>
 
 </template>
@@ -24,7 +26,7 @@ import {
     CardTitle
 } from '@/components/ui/card';
 
-import type { NodeProps } from '@vue-flow/core';
+import { Handle, Position, type NodeProps } from '@vue-flow/core';
 import { Zap } from 'lucide-vue-next';
 
 const props = defineProps<NodeProps>()

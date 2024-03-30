@@ -12,6 +12,8 @@
         <CardContent>
             Business Hours - {{ props.data.timezone }}
         </CardContent>
+        <Handle :id="props.id" type="source" :position="Position.Bottom" />
+        <Handle :id="props.id" type="target" :position="Position.Top" />
     </Card>
 
 </template>
@@ -25,7 +27,7 @@ import {
 } from '@/components/ui/card';
 
 import type { NodeData } from '@/types/NodeData';
-import type { NodeProps } from '@vue-flow/core';
+import { Handle, Position, type NodeProps } from '@vue-flow/core';
 import { Calendar } from 'lucide-vue-next';
 
 const props = defineProps<NodeProps<NodeData>>()

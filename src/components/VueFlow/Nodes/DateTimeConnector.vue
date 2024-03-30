@@ -5,6 +5,8 @@
         background-color="#e1ebff"
     >
         {{ props.data.connectorType }}
+        <Handle :id="props.id" type="source" :position="Position.Bottom" />
+        <Handle :id="props.id" type="target" :position="Position.Top" />
     </Chip>
 </template>
 
@@ -12,7 +14,7 @@
 
 import Chip from '@/components/Global/Chip.vue';
 import type { NodeData } from '@/types/NodeData';
-import type { NodeProps } from '@vue-flow/core';
+import { Handle, Position, type NodeProps } from '@vue-flow/core';
 
 const props = defineProps<NodeProps<NodeData>>()
 
