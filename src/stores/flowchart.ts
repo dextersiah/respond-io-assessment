@@ -4,6 +4,7 @@ import type { NodeData } from "@/types/NodeData";
 import { Position, useVueFlow, type DefaultEdge, type Node } from "@vue-flow/core";
 import { defineStore } from "pinia";
 import { nextTick, onMounted, ref } from "vue";
+import { useRouter } from "vue-router";
 
 
 let id = 0
@@ -17,7 +18,8 @@ export const useFlowChart = defineStore("flowchart", () => {
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
-    const { addNodes, fitView, onNodesInitialized } = useVueFlow();
+    const { addNodes, fitView, onNodesInitialized, onNodeClick } = useVueFlow();
+    const router = useRouter();
 
     /**
      * Events / Lifecycles
@@ -53,6 +55,10 @@ export const useFlowChart = defineStore("flowchart", () => {
         nextTick(() => {
             fitView()
         })
+    })
+
+    onNodeClick((nodeMouseEvent) => {
+        router.push(`/node/${nodeMouseEvent.node.id}`)
     })
  
 
