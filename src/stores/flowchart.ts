@@ -15,6 +15,9 @@ const getId = () => {
 
 //@ts-ignore vueflow type imports causing error
 export const useFlowChart = defineStore("flowchart", () => {
+
+    const CLICKABLE_NODES = ['sendMessage', 'addComments', 'dateTime', 'trigger'];
+
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
@@ -58,7 +61,9 @@ export const useFlowChart = defineStore("flowchart", () => {
     })
 
     onNodeClick((nodeMouseEvent) => {
-        router.push(`/node/${nodeMouseEvent.node.id}`)
+        if(CLICKABLE_NODES.includes(nodeMouseEvent.node.type)) {
+            router.push(`/node/${nodeMouseEvent.node.id}`)
+        }
     })
  
 
