@@ -16,7 +16,7 @@ const getId = () => {
 //@ts-ignore vueflow type imports causing error
 export const useFlowChart = defineStore("flowchart", () => {
 
-    const CLICKABLE_NODES = ['sendMessage', 'addComments', 'dateTime', 'trigger'];
+    const CLICKABLE_NODES = ['sendMessage', 'addComment', 'dateTime', 'trigger'];
 
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
