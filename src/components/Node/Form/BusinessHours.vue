@@ -18,9 +18,8 @@
 
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
-import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols';
+import { NODES_INJECTION_KEY, SHEET_INJECTION_KEY, type NODES_INJECT_PARAMS, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols';
 import { useFlowChart } from '@/stores/flowchart';
-import type { NodeData } from '@/types/NodeData';
 import { inject, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import DailyBusinessHours from './DailyBusinessHours.vue';
@@ -29,10 +28,7 @@ import DailyBusinessHours from './DailyBusinessHours.vue';
 const { updateSpecificNodeData } = useFlowChart()
 const route= useRoute()
 
-const injectedNodeDetails = inject<{
-    nodeData: NodeData | undefined
-}>('nodeData')
-
+const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 const businessHoursRef = ref<InstanceType<typeof DailyBusinessHours>[] | null>(null)

@@ -8,9 +8,8 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
-import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
+import { NODES_INJECTION_KEY, SHEET_INJECTION_KEY, type NODES_INJECT_PARAMS, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
 import { useFlowChart } from '@/stores/flowchart'
-import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
@@ -27,11 +26,7 @@ const route = useRoute()
 /**
  * State
  */
-const injectedNodeDetails = inject<{
-    nodeData: NodeData | undefined,
-    formCallback: () => void
-        }>('nodeData')
-
+const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 /**

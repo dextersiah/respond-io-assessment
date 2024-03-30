@@ -43,9 +43,8 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { SHEET_INJECTION_KEY, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
+import { NODES_INJECTION_KEY, SHEET_INJECTION_KEY, type NODES_INJECT_PARAMS, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
 import { useFlowChart } from '@/stores/flowchart'
-import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
@@ -55,10 +54,7 @@ import * as z from 'zod'
 /**
  * Composables / Store
  */
-const injectedNodeDetails = inject<{
-    nodeData: NodeData | undefined
-}>('nodeData')
-
+const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 const route = useRoute()

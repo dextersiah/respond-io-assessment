@@ -9,8 +9,8 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { NODES_INJECTION_KEY, type NODES_INJECT_PARAMS } from '@/lib/injectionSymbols'
 import { useFlowChart } from '@/stores/flowchart'
-import type { NodeData } from '@/types/NodeData'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
@@ -23,10 +23,7 @@ import * as z from 'zod'
 const { updateNode } = useFlowChart()
 const route = useRoute()
 
-const injectedNodeDetails = inject<{
-    nodeData: NodeData | undefined,
-    formCallback: () => void
-        }>('nodeData')
+const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 
 
 /**
