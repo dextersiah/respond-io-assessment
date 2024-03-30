@@ -18,7 +18,7 @@ export const useFlowChart = defineStore("flowchart", () => {
     const nodes = ref<Node<NodeData>[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
-    const { addNodes, fitView, onNodesInitialized, onNodeClick } = useVueFlow();
+    const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData } = useVueFlow();
     const router = useRouter();
 
     /**
@@ -88,12 +88,40 @@ export const useFlowChart = defineStore("flowchart", () => {
     const getNodeById = (id: string) => {
         return nodes.value.find((node) => node.id === id)
     }
+
+    const updateNode = (node: Partial<NewNode>, nodeId: string, callback: Function) => {
+        const index = nodes.value.findIndex((n) => n.id === nodeId)
+
+        if (index !== -1) {
+            const newNodeData = {
+                ...nodes.value[index].data,
+                label: node.title,
+                payload: [
+                    {
+                        type: "text",
+                        text: node.description
+                    }
+                ]
+            }
+
+            nodes.value[index] = {
+                ...nodes.value[index],
+                data: newNodeData
+            }
+
+            updateNodeData(nodes.value[index].id, newNodeData)
+
+            callback()
+        }
+
+    }
  
 
     return { 
         nodes,
         edges,
         addNewNode,
-        getNodeById
+        getNodeById,
+        updateNode
     };
 });

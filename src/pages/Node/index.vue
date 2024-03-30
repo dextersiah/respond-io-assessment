@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import NodeDetails from '@/components/Node/Details.vue';
 import {
     Sheet,
     SheetContent,
@@ -6,6 +7,7 @@ import {
     SheetHeader,
     SheetTitle
 } from '@/components/ui/sheet';
+import { VisuallyHidden } from 'radix-vue';
 import { ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 
@@ -45,13 +47,15 @@ watch(sheetState, (value) => {
 <template>
     <Sheet v-model:open="sheetState">
         <SheetContent>
-            <SheetHeader>
-                <SheetTitle>Are you sure absolutely sure?</SheetTitle>
-                <SheetDescription>
-                    This action cannot be undone. This will permanently delete your account
-                    and remove your data from our servers.
-                </SheetDescription>
-            </SheetHeader>
+            <VisuallyHidden>
+                <SheetHeader>
+                    <SheetTitle>Node Details</SheetTitle>
+                    <SheetDescription>
+                        This is the node details sheet. It contains information about the node.
+                    </SheetDescription>
+                </SheetHeader>
+            </VisuallyHidden>
+            <NodeDetails />
         </SheetContent>
     </Sheet>
 </template>
