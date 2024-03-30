@@ -17,25 +17,35 @@ import {
     SelectValue,
 } from '@/components/ui/select'
 import { nodeOptions } from '@/lib/constants'
+import { useFlowChart } from '@/stores/flowchart'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import * as z from 'zod'
 
+/**
+ * Composables / Store
+ */
+const { addNewNode } = useFlowChart()
 
-const formSchema = toTypedSchema(z.object({
+
+/**
+ * Schema
+ */
+const Form = z.object({
     title: z.string().min(2).max(50),
     description: z.string().min(2).max(100),
     nodeType: z.enum(['sendMessage', 'addComment', 'businessHours']),
-}))
+})
+
+const formSchema = toTypedSchema(Form)
+
+export type NewNode = z.infer<typeof Form>
 
 const { handleSubmit } = useForm({
     validationSchema: formSchema,
 })
 
-const onSubmit = handleSubmit((values) => {
-    console.log(values);
-    
-})
+const onSubmit = handleSubmit(addNewNode)
 </script>
 
 <template>
