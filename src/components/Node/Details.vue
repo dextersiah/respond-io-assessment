@@ -50,7 +50,8 @@ const { getNodeById, deleteNode } = useFlowChart()
 const node = ref<Node<NodeData> | undefined>(getNodeById(route.params.id as string))
 
 provide(NODES_INJECTION_KEY, {
-    nodeData: node?.value?.data,
+    // TODO: Temporary fix for reactivity issue
+    nodeData: JSON.parse(JSON.stringify(node.value?.data)) as NodeData,
     formCallback: () => {
         node.value = getNodeById(route.params.id as string);
     }
