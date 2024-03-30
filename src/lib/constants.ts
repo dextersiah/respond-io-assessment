@@ -144,3 +144,18 @@ export const initialData: Array<Node> = [
         }
     }
 ]
+
+export const nodeOptions = [
+    {
+        value: 'sendMessage',
+        label: 'Send Message',
+    },
+    {
+        value: 'addComment',
+        label: 'Add Comment',
+    },
+    {
+        value: 'businessHours',
+        label: 'Business Hours',
+    }
+]
