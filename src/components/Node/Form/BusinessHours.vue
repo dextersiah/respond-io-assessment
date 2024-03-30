@@ -18,10 +18,12 @@
 
 <script setup lang="ts">
 import { Button } from '@/components/ui/button';
-import { NODES_INJECTION_KEY, SHEET_INJECTION_KEY, type NODES_INJECT_PARAMS, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols';
+import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue';
 import { useFlowChart } from '@/stores/flowchart';
+import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams';
 import { inject, ref } from 'vue';
 import { useRoute } from 'vue-router';
+import { NODES_INJECTION_KEY } from '../Details.vue';
 import DailyBusinessHours from './DailyBusinessHours.vue';
 
 

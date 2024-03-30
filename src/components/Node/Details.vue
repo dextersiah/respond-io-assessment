@@ -27,12 +27,18 @@
     </div>
 </template>
 
+
+<script lang="ts">
+export const NODES_INJECTION_KEY = Symbol() as InjectionKey<NODES_INJECT_PARAMS>
+</script>
+
 <script setup lang="ts">
 import GlobalText from '@/components/Global/Text.vue';
 import { useFlowChart } from '@/stores/flowchart';
+import type { NODES_INJECT_PARAMS } from '@/types/InjectionParams';
 import type { NodeData } from '@/types/NodeData';
 import type { Node } from '@vue-flow/core';
-import { computed, defineAsyncComponent, provide, ref } from 'vue';
+import { computed, defineAsyncComponent, provide, ref, type InjectionKey } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
@@ -43,7 +49,7 @@ const { getNodeById, deleteNode } = useFlowChart()
 
 const node = ref<Node<NodeData> | undefined>(getNodeById(route.params.id as string))
 
-provide('nodeData', {
+provide(NODES_INJECTION_KEY, {
     nodeData: node?.value?.data,
     formCallback: () => {
         node.value = getNodeById(route.params.id as string);

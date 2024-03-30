@@ -43,13 +43,15 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { NODES_INJECTION_KEY, SHEET_INJECTION_KEY, type NODES_INJECT_PARAMS, type SHEET_INJECT_PARAMS } from '@/lib/injectionSymbols'
+import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue'
 import { useFlowChart } from '@/stores/flowchart'
+import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
 import { useRoute } from 'vue-router'
 import * as z from 'zod'
+import { NODES_INJECTION_KEY } from '../Details.vue'
 
 /**
  * Composables / Store

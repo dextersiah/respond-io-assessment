@@ -1,3 +1,9 @@
+<script lang="ts">
+import type { InjectionKey } from 'vue';
+
+export const SHEET_INJECTION_KEY = Symbol() as InjectionKey<SHEET_INJECT_PARAMS>
+</script>
+
 <script setup lang="ts">
 import NodeDetails from '@/components/Node/Details.vue';
 import {
@@ -7,7 +13,7 @@ import {
     SheetHeader,
     SheetTitle
 } from '@/components/ui/sheet';
-import { SHEET_INJECTION_KEY } from '@/lib/injectionSymbols';
+import { type SHEET_INJECT_PARAMS } from '@/types/InjectionParams';
 import { VisuallyHidden } from 'radix-vue';
 import { provide, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
