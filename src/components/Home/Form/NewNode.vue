@@ -16,6 +16,7 @@ import {
     SelectTrigger,
     SelectValue,
 } from '@/components/ui/select'
+import { Textarea } from '@/components/ui/textarea'
 import { nodeOptions } from '@/lib/constants'
 import { useFlowChart } from '@/stores/flowchart'
 import { toTypedSchema } from '@vee-validate/zod'
@@ -63,7 +64,10 @@ const onSubmit = handleSubmit(addNewNode)
             <FormItem>
                 <FormLabel>Description</FormLabel>
                 <FormControl>
-                    <Input type="text" placeholder="Add your description" v-bind="componentField" />
+                    <Textarea
+                        placeholder="Add your description"
+                        v-bind="componentField"
+                    />
                 </FormControl>
                 <FormMessage />
             </FormItem>
