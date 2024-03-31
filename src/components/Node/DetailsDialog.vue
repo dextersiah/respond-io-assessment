@@ -21,7 +21,7 @@ const dialogState = ref(false)
                 Edit
             </Button>
         </DialogTrigger>
-        <DialogContent class="sm:max-w-md">
+        <DialogContent class="sm:max-w-md" @interact-outside="dialogState = false">
             <DialogHeader>
                 <DialogTitle>Edit Node Details</DialogTitle>
                 <DialogDescription>
