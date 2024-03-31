@@ -25,6 +25,6 @@ export interface NodeData {
     comment?:        string;
 }
 
+export type NodeTypes = 'businessHours' | 'dateTime' | 'sendMessage' | 'addComment' | 'trigger' | 'dateTimeConnector'
 
-
-export type NodeWithData = Node<NodeData>
+export type NodeWithData = Node<NodeData, {}, NodeTypes>

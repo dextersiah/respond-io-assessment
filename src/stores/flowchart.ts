@@ -1,6 +1,6 @@
 import type { NewNode } from "@/components/Home/Form/NewNode.vue";
 import initialData from "@/lib/initialData.json";
-import type { NodeData, NodeWithData } from "@/types/NodeData";
+import type { NodeData, NodeTypes, NodeWithData } from "@/types/NodeData";
 import { Position, useVueFlow, type Connection, type DefaultEdge } from "@vue-flow/core";
 import { defineStore } from "pinia";
 import { nextTick, onMounted, ref } from "vue";
@@ -16,7 +16,7 @@ const getId = () => {
 //@ts-ignore vueflow type imports causing error
 export const useFlowChart = defineStore("flowchart", () => {
 
-    const CLICKABLE_NODES = ['sendMessage', 'addComment', 'dateTime', 'trigger'];
+    const CLICKABLE_NODES: NodeTypes[] = ['sendMessage', 'addComment', 'dateTime', 'trigger'];
 
     const nodes = ref<NodeWithData[]>([]);
     const edges = ref<DefaultEdge[]>([]);
@@ -31,7 +31,7 @@ export const useFlowChart = defineStore("flowchart", () => {
         nodes.value = initialData.map((node) => {
             return {
                 id: node.id.toString(),
-                type: node.type,
+                type: node.type as NodeTypes,
                 position: node.position,
                 data: {
                     label: node.name,
@@ -61,7 +61,7 @@ export const useFlowChart = defineStore("flowchart", () => {
     })
 
     onNodeClick((nodeMouseEvent) => {
-        if(CLICKABLE_NODES.includes(nodeMouseEvent.node.type)) {
+        if(CLICKABLE_NODES.includes(nodeMouseEvent.node.type as NodeTypes)) {
             router.push(`/node/${nodeMouseEvent.node.id}`)
         }
     })
@@ -88,10 +88,10 @@ export const useFlowChart = defineStore("flowchart", () => {
     const addNewNode = (node: NewNode) => {
         const nodeId = getId()
 
-        const nodeData = {
+        const nodeData: NodeWithData = {
             id: nodeId,
             position: { x: 0, y: 0 },
-            type: node.nodeType,
+            type: node.nodeType as NodeTypes,
             data: {
                 label: node.title,
                 payload: [
