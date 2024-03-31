@@ -1,7 +1,8 @@
 <template>
     <div>
         <DailyBusinessHours 
-            v-for="time in injectedNodeDetails?.nodeData?.times || []" 
+            v-for="time in injectedNodeDetails?.nodeData?.times || []"
+            v-memo="[injectedNodeDetails?.nodeData?.times]" 
             :key="time.day"
             :time="time"
             ref="businessHoursRef"
