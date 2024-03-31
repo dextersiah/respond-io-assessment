@@ -1,6 +1,6 @@
 <template>
     <ScrollArea class="scroll-height">
-        <div class="flex flex-col scroll-height">
+        <div class="flex flex-col px-1 scroll-height">
             <div class="flex justify-between items-center">
                 <div class="space-y-3">
                     <GlobalText tag="h4" weight="bold">
