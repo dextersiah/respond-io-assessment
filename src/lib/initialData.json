@@ -98,7 +98,7 @@
 		"id": "28c4b9",
 		"type": "dateTimeConnector",
 		"position": {
-			"x": 600,
+			"x": 700,
 			"y": 500
 		},
 		"data": {
@@ -111,7 +111,7 @@
 		"id": "b0653a",
 		"type": "sendMessage",
 		"position": {
-            "x": 400,
+            "x": 340,
             "y": 750
 		},
 		"data": {
