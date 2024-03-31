@@ -1,30 +1,32 @@
 <template>
-    <div class="flex flex-col h-[inherit]">
-        <div class="flex justify-between items-center">
-            <div class="space-y-3">
-                <GlobalText tag="h4" weight="bold">
-                    {{ node?.data?.label }}
-                </GlobalText>
+    <ScrollArea class="scroll-height">
+        <div class="flex flex-col scroll-height">
+            <div class="flex justify-between items-center">
+                <div class="space-y-3">
+                    <GlobalText tag="h4" weight="bold">
+                        {{ node?.data?.label }}
+                    </GlobalText>
 
-                <GlobalText tag="span">
-                    {{ node?.data?.payload?.find((item) => item.type === 'text')?.text }}
-                </GlobalText>
+                    <GlobalText tag="span">
+                        {{ node?.data?.payload?.find((item) => item.type === 'text')?.text }}
+                    </GlobalText>
+                </div>
+                <DetailsDialog />
             </div>
-            <DetailsDialog />
-        </div>
 
-        <Separator class="my-5"/>
+            <Separator class="my-5"/>
 
-        <component :is="nodeDetailsComponent" />
+            <component :is="nodeDetailsComponent" class="mb-10" />
         
-        <Button 
-            variant="destructive" 
-            class="w-full mt-auto" 
-            @click="deleteNodeHandler"
-        >
-            Delete Node
-        </Button>
-    </div>
+            <Button 
+                variant="destructive" 
+                class="w-full mt-auto" 
+                @click="deleteNodeHandler"
+            >
+                Delete Node
+            </Button>
+        </div>
+    </ScrollArea>
 </template>
 
 
@@ -42,6 +44,7 @@ import type { Node } from '@vue-flow/core';
 import { computed, defineAsyncComponent, inject, provide, ref, type InjectionKey } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button } from '../ui/button';
+import { ScrollArea } from '../ui/scroll-area';
 import { Separator } from '../ui/separator';
 import DetailsDialog from './DetailsDialog.vue';
 
@@ -80,6 +83,8 @@ const deleteNodeHandler = () => {
 
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+.scroll-height {
+    height: calc(100vh - 3rem);
+}
 </style>
