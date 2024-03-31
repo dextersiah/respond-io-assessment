@@ -36,28 +36,28 @@ export const NODES_INJECTION_KEY = Symbol() as InjectionKey<NODES_INJECT_PARAMS>
 
 <script setup lang="ts">
 import GlobalText from '@/components/Global/Text.vue';
+import { useNode } from '@/composables/node';
 import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue';
 import { useFlowChart } from '@/stores/flowchart';
 import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams';
 import type { NodeData } from '@/types/NodeData';
 import type { Node } from '@vue-flow/core';
 import { computed, defineAsyncComponent, inject, provide, ref, type InjectionKey } from 'vue';
-import { useRoute } from 'vue-router';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
 import { Separator } from '../ui/separator';
 import DetailsDialog from './DetailsDialog.vue';
 
-const route = useRoute();
+const { currentNodeId } = useNode();
 const { getNodeById, deleteNode } = useFlowChart()
 
-const node = ref<Node<NodeData> | undefined>(getNodeById(route.params.id as string))
+const node = ref<Node<NodeData> | undefined>(getNodeById(currentNodeId.value))
 
 provide(NODES_INJECTION_KEY, {
     // TODO: Temporary fix for reactivity issue
     nodeData: JSON.parse(JSON.stringify(node.value?.data)) as NodeData,
     formCallback: () => {
-        node.value = getNodeById(route.params.id as string);
+        node.value = getNodeById(currentNodeId.value);
     }
 })
 
@@ -77,7 +77,7 @@ const nodeDetailsComponent = computed(() => {
 })
 
 const deleteNodeHandler = () => {
-    deleteNode(route.params.id as string)
+    deleteNode(currentNodeId.value)
     injectSheet?.hideSheet()
 }
 

@@ -9,12 +9,12 @@ import {
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
+import { useNode } from '@/composables/node'
 import { useFlowChart } from '@/stores/flowchart'
 import type { NODES_INJECT_PARAMS } from '@/types/InjectionParams'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
-import { useRoute } from 'vue-router'
 import * as z from 'zod'
 import { NODES_INJECTION_KEY } from '../Details.vue'
 
@@ -22,7 +22,7 @@ import { NODES_INJECTION_KEY } from '../Details.vue'
  * Composables / Store
  */
 const { updateNode } = useFlowChart()
-const route = useRoute()
+const { currentNodeId } = useNode()
 
 const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 
@@ -50,7 +50,7 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit((values) => {
-    updateNode(values, route.params.id as string, () => {
+    updateNode(values, currentNodeId.value, () => {
         injectedNodeDetails?.formCallback()
         emit('on-close');
     })

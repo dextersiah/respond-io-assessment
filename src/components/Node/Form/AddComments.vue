@@ -8,13 +8,13 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
+import { useNode } from '@/composables/node'
 import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue'
 import { useFlowChart } from '@/stores/flowchart'
 import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
-import { useRoute } from 'vue-router'
 import * as z from 'zod'
 import { NODES_INJECTION_KEY } from '../Details.vue'
 
@@ -22,7 +22,7 @@ import { NODES_INJECTION_KEY } from '../Details.vue'
  * Composables / Store
  */
 const { updateSpecificNodeData } = useFlowChart()
-const route = useRoute()
+const { currentNodeId } = useNode()
 
 
 /**
@@ -50,7 +50,7 @@ const { handleSubmit } = useForm({
 })
 
 const onSubmit = handleSubmit((values) => {
-    updateSpecificNodeData(route.params.id as string, values)
+    updateSpecificNodeData(currentNodeId.value, values)
     injectSheet?.hideSheet()
 })
 </script>

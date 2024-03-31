@@ -43,13 +43,13 @@ import {
     FormMessage
 } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
+import { useNode } from '@/composables/node'
 import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue'
 import { useFlowChart } from '@/stores/flowchart'
 import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams'
 import { toTypedSchema } from '@vee-validate/zod'
 import { useForm } from 'vee-validate'
 import { inject } from 'vue'
-import { useRoute } from 'vue-router'
 import * as z from 'zod'
 import { NODES_INJECTION_KEY } from '../Details.vue'
 
@@ -59,8 +59,7 @@ import { NODES_INJECTION_KEY } from '../Details.vue'
 const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
-const route = useRoute()
-
+const { currentNodeId } = useNode()
 const { updateSpecificNodeData } = useFlowChart()
 
 /**
@@ -98,7 +97,7 @@ const parseValues = (values: FormType) => {
 }
 
 const onSubmit = handleSubmit((values) => {
-    updateSpecificNodeData(route.params.id as string, parseValues(values))
+    updateSpecificNodeData(currentNodeId.value, parseValues(values))
     injectSheet?.hideSheet()
 })
 
