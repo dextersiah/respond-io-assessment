@@ -10,7 +10,12 @@
             </CardTitle>
         </CardHeader>
         <CardContent>
-            Business Hours - {{ props.data.timezone }}
+            <GlobalText 
+                tag="p" v-for="payload in textPayload"
+                :key="payload.text" 
+            >
+                {{ payload.text }}
+            </GlobalText>
         </CardContent>
         <Handle :id="props.id" type="source" :position="Position.Bottom" />
         <Handle :id="props.id" type="target" :position="Position.Top" />
@@ -26,11 +31,18 @@ import {
     CardTitle
 } from '@/components/ui/card';
 
+import GlobalText from '@/components/Global/Text.vue';
 import type { NodeData } from '@/types/NodeData';
 import { Handle, Position, type NodeProps } from '@vue-flow/core';
 import { Calendar } from 'lucide-vue-next';
+import { computed } from 'vue';
 
 const props = defineProps<NodeProps<NodeData>>()
+
+
+const textPayload = computed(() => {
+    return props?.data?.payload?.filter((item) => item.type === 'text')
+})
 
 </script>
 
