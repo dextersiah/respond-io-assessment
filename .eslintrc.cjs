@@ -26,7 +26,7 @@ module.exports = {
         ],
         "eol-last": 0,
         "no-trailing-spaces": 0,
-        "@typescript-eslint/no-unused-vars": 2, // Change to 1 to set to warning instead of error
+        "@typescript-eslint/no-unused-vars": 1, // Change to 1 to set to warning instead of error
         "semi": 0,
         "vue/multi-word-component-names": 0,
     }
