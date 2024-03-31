@@ -20,7 +20,7 @@
         <Button 
             variant="destructive" 
             class="w-full mt-auto" 
-            @click="deleteNode(node?.id as string)"
+            @click="deleteNodeHandler"
         >
             Delete Node
         </Button>
@@ -34,11 +34,12 @@ export const NODES_INJECTION_KEY = Symbol() as InjectionKey<NODES_INJECT_PARAMS>
 
 <script setup lang="ts">
 import GlobalText from '@/components/Global/Text.vue';
+import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue';
 import { useFlowChart } from '@/stores/flowchart';
-import type { NODES_INJECT_PARAMS } from '@/types/InjectionParams';
+import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams';
 import type { NodeData } from '@/types/NodeData';
 import type { Node } from '@vue-flow/core';
-import { computed, defineAsyncComponent, provide, ref, type InjectionKey } from 'vue';
+import { computed, defineAsyncComponent, inject, provide, ref, type InjectionKey } from 'vue';
 import { useRoute } from 'vue-router';
 import { Button } from '../ui/button';
 import { Separator } from '../ui/separator';
@@ -57,6 +58,7 @@ provide(NODES_INJECTION_KEY, {
     }
 })
 
+const injectSheet = inject<SHEET_INJECT_PARAMS>(SHEET_INJECTION_KEY)
 
 const nodeDetailsComponent = computed(() => {
     switch (node.value?.type) {
@@ -70,6 +72,11 @@ const nodeDetailsComponent = computed(() => {
         return null;
     }
 })
+
+const deleteNodeHandler = () => {
+    deleteNode(route.params.id as string)
+    injectSheet?.hideSheet()
+}
 
 </script>
 
