@@ -34,7 +34,8 @@ const props = defineProps<{
     time: Time
 }>()
 
-const timeData = ref<Time>(props.time)
+// Note: Spread the props to avoid object passed by reference
+const timeData = ref<Time>({ ...props.time })
 
 defineExpose({ timeData })
 
