@@ -1,7 +1,7 @@
 import type { NewNode } from "@/components/Home/Form/NewNode.vue";
 import initialData from "@/lib/initialData.json";
-import type { NodeData } from "@/types/NodeData";
-import { Position, useVueFlow, type Connection, type DefaultEdge, type Node } from "@vue-flow/core";
+import type { NodeData, NodeWithData } from "@/types/NodeData";
+import { Position, useVueFlow, type Connection, type DefaultEdge } from "@vue-flow/core";
 import { defineStore } from "pinia";
 import { nextTick, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
@@ -18,7 +18,7 @@ export const useFlowChart = defineStore("flowchart", () => {
 
     const CLICKABLE_NODES = ['sendMessage', 'addComment', 'dateTime', 'trigger'];
 
-    const nodes = ref<Node<NodeData>[]>([]);
+    const nodes = ref<NodeWithData[]>([]);
     const edges = ref<DefaultEdge[]>([]);
 
     const { addNodes, fitView, onNodesInitialized, onNodeClick, updateNodeData, removeNodes, onConnect, addEdges } = useVueFlow();

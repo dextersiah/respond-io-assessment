@@ -40,8 +40,7 @@ import { useNode } from '@/composables/node';
 import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue';
 import { useFlowChart } from '@/stores/flowchart';
 import type { NODES_INJECT_PARAMS, SHEET_INJECT_PARAMS } from '@/types/InjectionParams';
-import type { NodeData } from '@/types/NodeData';
-import type { Node } from '@vue-flow/core';
+import type { NodeData, NodeWithData } from '@/types/NodeData';
 import { computed, defineAsyncComponent, inject, provide, ref, type InjectionKey } from 'vue';
 import { Button } from '../ui/button';
 import { ScrollArea } from '../ui/scroll-area';
@@ -51,7 +50,7 @@ import DetailsDialog from './DetailsDialog.vue';
 const { currentNodeId } = useNode();
 const { getNodeById, deleteNode } = useFlowChart()
 
-const node = ref<Node<NodeData> | undefined>(getNodeById(currentNodeId.value))
+const node = ref<NodeWithData| undefined>(getNodeById(currentNodeId.value))
 
 provide(NODES_INJECTION_KEY, {
     // TODO: Temporary fix for reactivity issue

@@ -1,3 +1,5 @@
+import type { Node } from '@vue-flow/core';
+
 export interface Time {
     startTime: string;
     endTime:   string;
@@ -24,3 +26,5 @@ export interface NodeData {
 }
 
 
+
+export type NodeWithData = Node<NodeData>
