@@ -8,13 +8,16 @@ import {
     DialogTitle,
     DialogTrigger
 } from '@/components/ui/dialog';
+import { ref } from 'vue';
 import FormNodeDetails from './Form/NodeDetails.vue';
+
+const dialogState = ref(false)
 </script>
 
 <template>
-    <Dialog>
+    <Dialog :open="dialogState">
         <DialogTrigger as-child>
-            <Button variant="link" size="sm">
+            <Button variant="link" size="sm" @click="dialogState = true">
                 Edit
             </Button>
         </DialogTrigger>
@@ -25,7 +28,7 @@ import FormNodeDetails from './Form/NodeDetails.vue';
                     Update the details of the node.
                 </DialogDescription>
             </DialogHeader>
-            <FormNodeDetails />
+            <FormNodeDetails @on-close="dialogState = false"/>
         </DialogContent>
     </Dialog>
 </template>

@@ -26,6 +26,10 @@ const route = useRoute()
 
 const injectedNodeDetails = inject<NODES_INJECT_PARAMS>(NODES_INJECTION_KEY)
 
+const emit = defineEmits<{
+    (event: 'on-close'): void
+}>()
+
 
 /**
  * Schema
@@ -48,6 +52,7 @@ const { handleSubmit } = useForm({
 const onSubmit = handleSubmit((values) => {
     updateNode(values, route.params.id as string, () => {
         injectedNodeDetails?.formCallback()
+        emit('on-close');
     })
 }) 
 </script>
