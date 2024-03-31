@@ -3,7 +3,7 @@
         <img :src="currentImage" :alt="currentImage" :width="300">
         <ul class="gallery-row">
             <li v-for="(image, index) in props.images" :key="image">
-                <button @click="currentImageIndex = index">
+                <button type="button" @click="currentImageIndex = index">
                     <img :src="image" :alt="image" :width="80" :height="50">
                 </button>
             </li>
