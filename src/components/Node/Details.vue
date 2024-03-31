@@ -18,13 +18,29 @@
 
             <component :is="nodeDetailsComponent" class="mb-10" />
         
-            <Button 
-                variant="destructive" 
-                class="w-full mt-auto" 
-                @click="deleteNodeHandler"
-            >
-                Delete Node
-            </Button>
+          
+            <AlertDialog>
+                <AlertDialogTrigger as-child>
+                    <Button 
+                        variant="destructive" 
+                        class="w-full mt-auto"
+                    >
+                        Delete Node
+                    </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent>
+                    <AlertDialogHeader>
+                        <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                        <AlertDialogDescription>
+                            This action cannot be undone. This will permanently delete your node.
+                        </AlertDialogDescription>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction @click="deleteNodeHandler">Continue</AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </div>
     </ScrollArea>
 </template>
@@ -36,6 +52,17 @@ export const NODES_INJECTION_KEY = Symbol() as InjectionKey<NODES_INJECT_PARAMS>
 
 <script setup lang="ts">
 import GlobalText from '@/components/Global/Text.vue';
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogCancel,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+    AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { useNode } from '@/composables/node';
 import { SHEET_INJECTION_KEY } from '@/pages/Node/index.vue';
 import { useFlowChart } from '@/stores/flowchart';
